@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>报修信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../layui_source/layui/css/layui.css" media="all" />
+    <style>
+         body{overflow-x: scroll;}
+    </style>
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-inline" style="margin-left: 18px;">
+                    部门名称:
+                    <div  class="layui-input-inline">
+                        <input type="text" name="departmentName" class="layui-input departmentName" placeholder="请输入需搜索的部门名称" />
+                    </div>
+                </div>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    计算机所在地:
+                    <div class="layui-input-inline" >
+                        <input type="text" name="cpuAds" class="layui-input cpuAds" placeholder="请输入搜索的计算机所在地" />
+                    </div>
+                </div>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    使用人姓名:
+                    <div class="layui-input-inline">
+                        <input type="text" name="cupUser" class="layui-input cupUser" placeholder="请输入使用人姓名" />
+                    </div>
+                </div>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    资产编号:
+                    <div class="layui-input-inline" >
+                        <input type="text" name="zcCode" class="layui-input zcCode" placeholder="请输入需搜索的资产编号" />
+                    </div>
+                </div>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    计算机编号:
+                    <div class="layui-input-inline" >
+                        <input type="text" name="cpuCode" class="layui-input cpuCode" placeholder="请输入需搜索的计算机编号" />
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    计算机品牌:
+                    <div class="layui-input-inline" >
+                        <input type="text" name="cpuMark" class="layui-input cpuMark" placeholder="请输入需搜索的计算机品牌" />
+                    </div>
+                </div>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    ip地址:
+                    <div class="layui-input-inline" >
+                        <input type="text" name="ipAds" class="layui-input ipAds" placeholder="请输入需搜索的ip地址" />
+                    </div>
+                </div>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    mac地址:
+                    <div class="layui-input-inline" >
+                        <input type="text" name="macAds" class="layui-input macAds" placeholder="请输入需搜索的mac地址" />
+                    </div>
+                </div>
+
+       <!--         <div  class="layui-inline"  style="margin-left: 20px;">
+                    报修类型:
+                    <div class="layui-input-inline">
+                        <select name="bType" id="bType"  class="bType" lay-filter="bType">
+                            <option value>选择报修类型</option>
+                            <option value="X86报修"    >X86报修</option>
+                            <option value="小型机报修" >小型机报修</option>
+                            <option value="存储器报修" >存储器报修</option>
+                            <option value="数据库报修" >数据库报修</option>
+                            <option value="其它报修"   >其它报修</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+                <div  class="layui-inline"  style="margin-left: 20px;">
+                    报修时间:
+                    <div class="layui-input-inline">
+                        <input  style="width: 183px;"name="startTime" lay-verify="date" id="startTime" class="layui-input startTime" placeholder="请输入起始时间" />
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;——&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="layui-input-inline">
+                        <input style="width: 183px;"name="endTime" lay-verify="date" id="endTime" class="layui-input endTime" placeholder="请输入截止时间" />
+                    </div>
+                </div>
+                <div  class="layui-inline"  style="margin-left: 20px; ">
+                    服务进度状态:
+                    <div class="layui-input-inline">
+                        <div class="layui-input-inline" style="width: 183px">
+                            <select name="bfAttributes" class="bfAttributes" id="bfAttributes" lay-filter="bfAttributes">
+                                <option value>选择当前服务进度</option>
+                                <option value="a" style="color: #A757A8;">待审核</option>
+                                <option value="b" style="color: #A757A8;">已审核</option>
+                                <option value="c" style="color: #A757A8;">处理中</option>
+                                <option value="d" style="color: #A757A8;">已完成</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>-->
+
+                <a class="layui-btn search_btn" style="margin-left: 95px;" data-type="reload">搜索</a>
+                <a class="layui-btn layui-btn-danger layui-btn-normal add_ads"  style="margin-left: 20px;">新增</a>
+                <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn" style="margin-left: 20px;">批量删除</a>
+            </div>
+            </div>
+        </form>
+    </blockquote>
+
+    <table id="repairList" lay-filter="repairList"></table>
+
+    <!--操作-->
+    <script type="text/html" id="repairListBar">
+        <a class="layui-btn layui-btn-xs" lay-event="change">修改</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+        <!--<a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="look">预览</a>-->
+    </script>
+
+    <script type="text/html" id="selectServe">
+        <select name="bfAttribute" id="bfAttribute" lay-filter="bfAttribute_svc" data-value="{{d.bfAttribute}}">
+            <option value>选择当前服务进度</option>
+            <option value="a" style="color: #A757A8;">待审核</option>
+            <option value="b" style="color: #A757A8;">已审核</option>
+            <option value="c" style="color: #A757A8;">处理中</option>
+            <option value="d" style="color: #A757A8;">已完成</option>
+        </select>
+    </script>
+
+
+</form>
+<script type="text/javascript" src="../layui_source/layui/layui.js"></script>
+<script type="text/javascript" src="../layui_source/layui/layui.all.js"></script>
+<script type="text/javascript" src="../layui_source/js/repairList.js"></script>
+<script type="text/javascript">
+
+    // $(document).on('click','.download_all',function(data) {
+    //     console.log(jsonRes);
+    //     var str=jsonRes["file"+1];
+    //     var split = str.split("//");
+    //     var path="";
+    //     for (var i = 0; i <split.length-1 ; i++) {
+    //         if(i==split.length-2){
+    //             path=path+split[i];
+    //         }else {
+    //             path=path+split[i]+"//";
+    //         }
+    //     }
+    //     $.post("/fileToZip",{
+    //         path:path
+    //     },function (res) {
+    //         console.log(res);
+    //         window.location.href="/fileDownload?path="+res;
+    //     })
+    // });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html class="loginHtml" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<meta charset="utf-8">
+	<title>长寿公安地址管理系统</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="icon" href="../layui_source/favicon.ico">
+	<link rel="stylesheet" href="../layui_source/layui/css/layui.css" media="all" />
+	<style type="text/css">
+		Body{
+			width: 100%;
+			height: 100%;
+			/*position: absolute;*/
+			margin: 0;
+			padding: 0;
+			background:url("../layui_source/images/back.jpg");
+			background-repeat: no-repeat;
+			background-size:100% 100%;
+			background-attachment:fixed;
+		}
+		.login-header{
+			position: relative;
+			width: 500px;
+			height: 70px;
+			margin: 0 auto;
+			margin-top: 25%;
+			font-family: "Microsoft YaHei UI";
+			color: #00F7DE;
+			text-align: center;
+
+		}
+		.login-header .p_head{
+			font-size: 1.6em;
+			 padding-top: 20px;
+			 line-height: 0px;
+			 letter-spacing: 4px;
+		 }
+		.login-header p{
+			font-size: 0.9em;
+		}
+		.body_header{
+			position: relative;
+			width: 500px;
+			height:350px;
+			margin: 0 auto;
+			margin-top: 1px;
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+		.body_title{
+			text-align: center;
+			font-size: 1.2em;
+			color: #00F7DE;
+			letter-spacing: 4px;
+			margin-top: 20px;
+			padding-top: 20px;
+		}
+        .body_content{
+			margin-top: 20px;
+		}
+		.body_footer button{
+			width: 60%;
+			margin-left: 20%;
+			margin-top: 20px;
+			letter-spacing: 3em;
+			font-size: 1em;
+		}
+		.body_footer p{
+			font-size: 0.8em;
+			text-align: center;
+		}
+	</style>
+</head>
+<body class="loginBody">
+	<form class="layui-form">
+		<div class="layui-container">
+			<div class="login-header">
+					<p class="p_head">长寿公安地址管理系统</p>
+				    <br>
+				    <p>CS_Police Address  Management System</p>
+			</div>
+			<div class="body_header">
+                <div class="body_title">
+					<br>
+						ACCOUNT LOGIN
+				</div>
+				<div class="body_content">
+					<div class="layui-form-item" style="width: 80%;">
+						<label class="layui-form-label">账号</label>
+						<div class="layui-input-block">
+							<input type="text" id="userName" name="userName" required  lay-verify="required" placeholder="身份证号码" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item" style="width: 80%;">
+						<label class="layui-form-label">密码</label>
+						<div class="layui-input-block" >
+							<input type="password" id="password" name="password" required  lay-verify="required" placeholder=" 用户密码" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="body_footer layui-form-item">
+						<p>忘记密码请联系管理员</p>
+						<button  class="layui-btn layui-btn-fluid " lay-filter="login0"  lay-submit>登陆</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+</body>
+<script type="text/javascript" src="../layui_source/layui/layui.js"></script>
+<script type="text/javascript" src="../layui_source/js/login.js"></script>
+<script type="text/javascript">
+	function checkFrame(){
+        if(window.top.location.href!=location.href)
+        {
+            window.top.location.href=location.href;
+        }
+    }
+    window.onload=checkFrame;
+</script>
+</html>

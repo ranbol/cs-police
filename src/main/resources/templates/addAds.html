@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新增版本</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../layui_source/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../layui_source/css/public.css" media="all" />
+
+</head>
+<body class="childrenBody">
+<form class="layui-form" id="adsForms">
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >部门名称:</label>
+            <input type="text"  class="departmentName" name="departmentName" style="margin-top: 3px;padding: 5px;width: 350px;"  placeholder="请输入部门名称">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >计算机所在地:</label>
+            <input type="text"  class="cpuAds" name="cpuAds" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入计算机所在地">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >使用人姓名:</label>
+            <input type="text"  class="cupUser" name="cupUser" style="margin-top: 3px;padding: 5px;width: 350px;"  placeholder="请输入您的姓名">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >资产编号:</label>
+            <input type="text"  class="zcCode" name="zcCode" style="margin-top: 3px;padding: 5px;width: 350px;"  placeholder="请输入资产编号">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >计算机编号:</label>
+            <input type="text"  class="cpuCode" name="cpuCode" style="margin-top: 3px;padding: 5px;width: 350px;"  placeholder="请输入计算机编号">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >计算机品牌:</label>
+            <input type="text"  class="cpuMark" name="cpuMark" style="margin-top: 3px;padding: 5px;width: 350px;"  placeholder="请输入计算机品牌">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >ip地址:</label>
+            <input type="text"  class="ipAds" name="ipAds" style="margin-top: 3px;padding: 5px;width: 350px;"  placeholder="请输入ip地址">
+        </div>
+    </div> <div class="layui-form-item">
+    <div class="layui-upload">
+        <label class="layui-form-label" >mac地址:</label>
+        <input type="text"  class="macAds" name="macAds" style="margin-top: 3px;padding: 5px;width: 350px;"  placeholder="请输入mac地址">
+    </div>
+</div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >操作系统使用的软件名称及版本:</label>
+            <input type="text"  class="sysNv" name="sysNv" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入操作系统使用的软件名称及版本">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >预装软件名称及版本:</label>
+            <input type="text"  class="softNv" name="softNv" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入预装软件名称及版本">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >操作系统软件是否授权（或OEM）:</label>
+            <div class="layui-input-block" style="margin-top: 15px;padding: 5px;width: 350px;">
+                <input type="radio"  class="orLicense" name="orLicense" value="是" title="是" checked="">
+                <input type="radio"  class="orLicense" name="orLicense" value="否" title="否">
+            </div>
+<!--
+            <input type="text"  class="orLicense" name="orLicense" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入操作系统软件是否授权">
+-->
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >办公软件名称及版本:</label>
+            <input type="text"  class="workSoftNv" name="workSoftNv" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入办公软件名称及版本">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >办公软件是否授权:</label>
+            <div class="layui-input-block" style="margin-top: 15px;padding: 5px;width: 350px;">
+                <input type="radio"  class="workSoftLicense" name="workSoftLicense" value="是" title="是" checked="">
+                <input type="radio"  class="workSoftLicense" name="workSoftLicense" value="否" title="否">
+            </div>
+<!--
+            <input type="text"  class="workSoftLicense" name="workSoftLicense" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入办公软件是否授权">
+-->
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >杀毒软件名称及版本:</label>
+            <input type="text"  class="virusNv" name="virusNv" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入杀毒软件名称及版本">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-upload">
+            <label class="layui-form-label" >使用的网络类型:</label>
+            <input type="text"  class="intType" name="intType" style="margin-top: 15px;padding: 5px;width: 350px;"  placeholder="请输入使用的网络类型">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <a class="layui-btn layui-btn-sm" lay-filter="addAds" lay-submit><i class="layui-icon">&#xe609;</i>提交</a>
+            <button type="reset" class="layui-btn reset">返回</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript" src="../layui_source/layui/layui.js"></script>
+<script type="text/javascript" src="../layui_source/layui/layui.all.js"></script>
+<script type="text/javascript" src="../layui_source/js/addAds.js"></script>
+</body>
+</html>

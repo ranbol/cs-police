@@ -1,0 +1,44 @@
+server:
+  port: 8002
+
+mybatis-plus:
+  type-aliases-package: com.cs.police.cspolice.dao.mapper
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  config-location:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql
+logging:
+  level:
+    com.haocheng.study.springboot.mybatisplus: debug
+spring:
+  #MySQL数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/cs-police?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=FALSE
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #   Druid数据源配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+  #文件上传大小设置
+  servlet:
+    multipart:
+      enabled: true
+      resolve-lazily: true
+      max-file-size: 50MB
+  #thymeleaf配置文件
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: utf-8
+    cache: false
