@@ -6,6 +6,7 @@ import com.cs.police.cspolice.pojo.Ads;
 import com.cs.police.cspolice.rest.AdsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -74,7 +75,7 @@ public class AdsController {
      * @return
      */
     @PostMapping("/addAds")
-    public String addAds(Ads ads){
+    public String addAds(@RequestBody Ads ads){
         Map map=new HashMap();
         if (adsService.addAds(ads)){
             map.put("code","success");map.put("msg","添加成功");
@@ -131,10 +132,10 @@ public class AdsController {
      */
     @RequestMapping("/deleteAds")
     @Transactional
-    public String deleteAds(Long ids){
+    public String deleteAds(@RequestParam Integer ids){
         Map map=new HashMap();
         Integer integer=0;
-            integer = adsService.deleteAds(ids);
+            integer = adsService.deleteAds(Long.valueOf(ids));
             if (integer==0){
                 map.put("code","false");
                 map.put("msg","删除失败");

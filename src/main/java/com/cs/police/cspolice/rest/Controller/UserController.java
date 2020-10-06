@@ -1,7 +1,6 @@
 package com.cs.police.cspolice.rest.Controller;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.cs.police.cspolice.dao.mapper.DepartmentMapper;
 import com.cs.police.cspolice.dao.mapper.UserMapper;
 import com.cs.police.cspolice.pojo.Department;
@@ -64,7 +63,7 @@ public class UserController {
             session.setAttribute("user",map.get("data"));
             Department department = departmentMapper.selectById(user.getDpId());
             session.setAttribute("department",department);
-            request.getSession().setMaxInactiveInterval(6000);
+            request.getSession().setMaxInactiveInterval(60*60*1000);
         }
         return JSON.toJSONString(map);
     }
