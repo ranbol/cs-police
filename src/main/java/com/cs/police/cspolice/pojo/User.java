@@ -8,10 +8,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -48,8 +44,8 @@ public class User  implements Serializable {
     /**
      * 所属部门
      */
-    @TableField(value = "be_enter")
-    private String beEnter;
+    @TableField(value = "dp_id")
+    private Integer dpId;
 
     /**
      * 描述
@@ -57,4 +53,9 @@ public class User  implements Serializable {
     @TableField(value = "dsc")
     private String dsc;
 
+    /**
+     * 部门对象
+     */
+
+    private  Department department;
 }

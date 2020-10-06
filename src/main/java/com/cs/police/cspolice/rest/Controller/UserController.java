@@ -2,6 +2,8 @@ package com.cs.police.cspolice.rest.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.cs.police.cspolice.dao.mapper.DepartmentMapper;
+import com.cs.police.cspolice.pojo.Department;
 import com.cs.police.cspolice.pojo.User;
 import com.cs.police.cspolice.rest.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,9 @@ import java.util.Map;
 public class UserController {
     @Resource
     private UserService userService;
+
+    @Resource
+    private DepartmentMapper departmentMapper;
 
     @GetMapping("/getUser")
     public String getUser(){
@@ -57,4 +62,5 @@ public class UserController {
         }
         return JSON.toJSONString(map);
     }
+
 }

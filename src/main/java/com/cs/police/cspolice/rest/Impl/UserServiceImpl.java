@@ -3,7 +3,9 @@ package com.cs.police.cspolice.rest.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cs.police.cspolice.dao.mapper.DepartmentMapper;
 import com.cs.police.cspolice.dao.mapper.UserMapper;
+import com.cs.police.cspolice.pojo.Department;
 import com.cs.police.cspolice.pojo.User;
 import com.cs.police.cspolice.rest.UserService;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ import java.util.Map;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private DepartmentMapper departmentMapper;
     @Override
     public Map userLogin(User user) {
         Map<String,Object> returnMap=new HashMap<>();
@@ -33,7 +38,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (user1==null){
          returnMap.put("code","false");returnMap.put("msg","用户名或密码错误");
         }else {
-         returnMap.put("code","true");returnMap.put("msg","登录成功");returnMap.put("data",user1);
+            Department department = departmentMapper.selectById(user1.getDpId());
+            user1.setDepartment(department);
+            returnMap.put("code","true");returnMap.put("msg","登录成功");returnMap.put("data",user1);
         }
         return returnMap;
     }
