@@ -17,4 +17,5 @@ public interface UserService extends IService<User> {
 
     Map userLogin(User user);
 
+    Map userUpdate(User user);
 }

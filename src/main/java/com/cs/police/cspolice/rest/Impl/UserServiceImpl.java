@@ -37,4 +37,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return returnMap;
     }
+
+    @Override
+    public Map userUpdate(User user) {
+        Map<String,Object> returnMap=new HashMap<>();
+        int i = userMapper.updateById(user);
+        if (i == 0){
+            returnMap.put("code","false");returnMap.put("msg","修改密码失败，请联系管理员");
+        }else{
+            returnMap.put("code","true");returnMap.put("msg","修改密码成功");
+        }
+        return returnMap;
+    }
 }
