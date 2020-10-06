@@ -1,6 +1,10 @@
 package com.cs.police.cspolice.rest.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cs.police.cspolice.dao.mapper.DepartmentMapper;
 import com.cs.police.cspolice.dao.mapper.UserMapper;
 import com.cs.police.cspolice.pojo.Department;
@@ -11,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +43,12 @@ public class UserController {
         return JSON.toJSONString("");
     }
 
+    /**
+     * 用户修改密码
+     * @param password
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/user/update")
     public String update(String password, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
@@ -47,6 +59,72 @@ public class UserController {
         user1.setId(user.getId());
         map = userService.userUpdate(user1);
         return JSON.toJSONString(map);
+    }
+
+    /**
+     * 分页查询
+     * @param queryMap
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/user/select")
+    public Map<String,Object> selectUser(Map<String,Object> queryMap,HttpServletRequest request){
+        Map<String,Object> result = new HashMap<>();
+        try {
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            int page = (Integer) queryMap.get("page");
+            int total = (Integer) queryMap.get("total");
+            IPage<User> iPage = new Page<User>(page,total);
+            IPage<User> userIPage;
+            Map<String,Object> map = new HashMap<>();
+            List<User> listUser = new ArrayList<>();
+            if ("a".equals(user.getPosition())) {
+                QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("position", user.getDpId());
+                userIPage = userService.page(iPage,queryWrapper);
+                listUser.addAll(userIPage.getRecords());
+                map.put("count",userIPage.getCurrent());
+            } else if ("b".equals(user.getPosition())) {
+                QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+                queryWrapper.eq("dp_id", user.getDpId());
+                userIPage = userService.page(iPage,queryWrapper);
+                listUser.addAll(userIPage.getRecords());
+                map.put("count",userIPage.getCurrent());
+            } else {
+                listUser.add(user);
+                map.put("count",1);
+            }
+            map.put("list",listUser);
+            result.put("code","true");
+            result.put("data",map);
+            result.put("msg","查询用户信息成功");
+        }catch (Exception e){
+            result.put("code","false");
+            result.put("msg","查询用户信息失败");
+        }
+        return result;
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping("/user/delete")
+    public Map<String,Object> deleteUser(String id, HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
+        try{
+            userMapper.deleteById(id);
+            map.put("code","false");
+            map.put("msg","删除用户成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("code","false");
+            map.put("msg","删除用户失败");
+        }
+        return map;
     }
 
     /**
@@ -63,7 +141,7 @@ public class UserController {
             session.setAttribute("user",map.get("data"));
             Department department = departmentMapper.selectById(user.getDpId());
             session.setAttribute("department",department);
-            request.getSession().setMaxInactiveInterval(60*60*1000);
+            request.getSession().setMaxInactiveInterval(6000);
         }
         return JSON.toJSONString(map);
     }
