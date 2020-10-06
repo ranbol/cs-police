@@ -46,6 +46,12 @@ public class User  implements Serializable {
     private String position;
 
     /**
+     * 所属部门
+     */
+    @TableField(value = "be_enter")
+    private String beEnter;
+
+    /**
      * 描述
      */
     @TableField(value = "dsc")
