@@ -52,10 +52,4 @@ public class User  implements Serializable {
      */
     @TableField(value = "dsc")
     private String dsc;
-
-    /**
-     * 部门对象
-     */
-
-    private  Department department;
 }

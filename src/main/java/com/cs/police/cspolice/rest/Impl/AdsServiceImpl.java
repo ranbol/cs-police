@@ -3,6 +3,7 @@ package com.cs.police.cspolice.rest.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cs.police.cspolice.common.BaseUtils;
 import com.cs.police.cspolice.dao.mapper.AdsMapper;
 import com.cs.police.cspolice.pojo.Ads;
 import com.cs.police.cspolice.rest.AdsService;
@@ -30,36 +31,10 @@ public class AdsServiceImpl extends ServiceImpl<AdsMapper, Ads> implements AdsSe
     }
 
     @Override
-    public List<Ads> allEmployeeCpuAds(Ads ads) {
+    public List<Ads> allEmployeeCpuAds(String searchKey,String searchValue) {
         QueryWrapper<Ads> queryWrapper=new QueryWrapper<>();
-        if (ads.getDepartmentName()!=null && ads.getDepartmentName()!=""){
-            queryWrapper.eq("department_name",ads.getDepartmentName());
-          //  queryWrapper.lambda().gt(Ads::getDepartmentName,ads.getDepartmentName());
-        }
-        if (ads.getCpuAds()!=null&& ads.getCpuAds()!=""){
-            queryWrapper.eq("cpu_ads",ads.getCpuAds());
-          //  queryWrapper.lambda().gt(Ads::getCpuAds,ads.getCpuAds());
-        }
-        if (ads.getCpuCode()!=null&& ads.getCpuCode()!=""){
-            queryWrapper.eq("cpu_code",ads.getCpuCode());
-          //  queryWrapper.lambda().gt(Ads::getCpuCode,ads.getCpuCode());
-        }
-        if (ads.getCpuMark()!=null&& ads.getCpuMark()!=""){
-            queryWrapper.eq("cpu_mark",ads.getCpuMark());
-          //  queryWrapper.lambda().gt(Ads::getCpuMark,ads.getCpuMark());
-        }
-        if (ads.getIpAds()!=null&& ads.getIpAds()!=""){
-            queryWrapper.eq("ip_ads",ads.getIpAds());
-          //  queryWrapper.lambda().gt(Ads::getIpAds,ads.getIpAds());
-        }
-        if (ads.getMacAds()!=null&& ads.getMacAds()!=""){
-            queryWrapper.eq("mac_ads",ads.getMacAds());
-           // queryWrapper.lambda().gt(Ads::getMacAds,ads.getMacAds());
-        }
-        if (ads.getCupUser()!=null&& ads.getCupUser()!=""){
-            queryWrapper.eq("cup_user",ads.getCupUser());
-          //  queryWrapper.lambda().gt(Ads::getCupUser,ads.getCupUser());
-        }
+        String s = BaseUtils.adsMap.get(searchKey);
+        queryWrapper.like(s,searchValue);
         List<Ads> adsList = adsMapper.selectList(queryWrapper);
         return adsList ;
     }

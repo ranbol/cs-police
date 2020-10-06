@@ -26,7 +26,7 @@ public interface AdsService extends IService<Ads> {
      * @param ads
      * @return
      */
-    List<Ads> allEmployeeCpuAds(Ads ads);
+    List<Ads> allEmployeeCpuAds(String searchKey,String searchValue);
 
     /**
      * 删除信息

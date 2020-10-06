@@ -3,6 +3,7 @@ package com.cs.police.cspolice.rest.Controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.cs.police.cspolice.dao.mapper.DepartmentMapper;
+import com.cs.police.cspolice.dao.mapper.UserMapper;
 import com.cs.police.cspolice.pojo.Department;
 import com.cs.police.cspolice.pojo.User;
 import com.cs.police.cspolice.rest.UserService;
@@ -24,6 +25,9 @@ import java.util.Map;
 public class UserController {
     @Resource
     private UserService userService;
+
+    @Resource
+    private UserMapper userMapper;
 
     @Resource
     private DepartmentMapper departmentMapper;
@@ -58,9 +62,27 @@ public class UserController {
         if (map.get("code")=="true"){
             HttpSession session=request.getSession();
             session.setAttribute("user",map.get("data"));
-            request.getSession().setMaxInactiveInterval(600);
+            request.getSession().setMaxInactiveInterval(6000);
         }
         return JSON.toJSONString(map);
+    }
+
+    /**
+     * （管理员新增）
+     * @param user
+     * @return
+     */
+    @PostMapping(value = "/user/regist")
+    @ResponseBody
+    public String register(@RequestBody User user){
+        int insert = userMapper.insert(user);
+        Map<String,Object> returnMap=new HashMap<>();
+        if (insert==1){
+            returnMap.put("code","true");returnMap.put("msg","新增用户成功");
+        }else {
+            returnMap.put("code","false");returnMap.put("msg","新增用户失败");
+        }
+        return JSON.toJSONString(returnMap) ;
     }
 
 }

@@ -34,17 +34,19 @@ public class AdsController {
      */
     @RequestMapping("getPageAds")
     public String showAllEmployeeAds(@RequestParam(name = "page",required = true,defaultValue ="1") Integer pageNum,
-                                         @RequestParam(name="limit", required=true,defaultValue = "10") Integer pageSize,
-                                         Ads ads){
+                                     @RequestParam(name="limit", required=true,defaultValue = "10") Integer pageSize,
+                                     @RequestParam (name = "searchKey") String searchKey,
+                                     @RequestParam (name = "searchValue") String searchValue){
         Map map=new HashMap();
         PageHelper.startPage(pageNum,pageSize);
-        List<Ads> adsList = adsService.allEmployeeCpuAds(ads);
+        List<Ads> adsList = adsService.allEmployeeCpuAds(searchKey,searchValue);
         PageInfo<Ads> pageInfo=new PageInfo<>(adsList);
         if (adsList.size()==0){
-            map.put("code",1);
-            map.put("msg","暂无信息");
+            map.put("code","true");
+            map.put("msg","暂无数据");
+            map.put("data","");
         }else {
-            map.put("code",0);
+            map.put("code","true");
             map.put("msg","SUCCESS");
             map.put("data",pageInfo.getList());
             map.put("count",pageInfo.getTotal());
