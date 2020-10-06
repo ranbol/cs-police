@@ -1,6 +1,7 @@
 package com.cs.police.cspolice.rest.Controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.cs.police.cspolice.pojo.Ads;
 import com.cs.police.cspolice.rest.AdsService;
 import com.github.pagehelper.PageHelper;
@@ -44,7 +45,8 @@ public class AdsController {
         if (adsList.size()==0){
             map.put("code","true");
             map.put("msg","暂无数据");
-            map.put("data","");
+            map.put("data",pageInfo.getList());
+            map.put("pageInfo",pageInfo);
         }else {
             map.put("code","true");
             map.put("msg","SUCCESS");
@@ -53,7 +55,7 @@ public class AdsController {
             pageInfo.setList(null);
             map.put("pageInfo",pageInfo);
         }
-        return JSON.toJSONString(map);
+        return JSON.toJSONString(map, SerializerFeature.WriteMapNullValue);
      }
 
     @RequestMapping("/getAds")

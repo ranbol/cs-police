@@ -62,6 +62,8 @@ public class UserController {
         if (map.get("code")=="true"){
             HttpSession session=request.getSession();
             session.setAttribute("user",map.get("data"));
+            Department department = departmentMapper.selectById(user.getDpId());
+            session.setAttribute("department",department);
             request.getSession().setMaxInactiveInterval(6000);
         }
         return JSON.toJSONString(map);

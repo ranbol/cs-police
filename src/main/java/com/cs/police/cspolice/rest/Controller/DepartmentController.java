@@ -32,11 +32,11 @@ public class DepartmentController {
         if("a".equals(user.getPosition())){
             QueryWrapper<Department> queryWrapper = new QueryWrapper();
             list =departmentMapper.selectList(queryWrapper);
-        }else if("b".equals(user.getPosition())&&1==department.getLevel()){
+        }/*else if("b".equals(user.getPosition())&&1==department.getLevel()){
             QueryWrapper<Department> queryWrapper = new QueryWrapper();
             queryWrapper.eq("pid",department.getId());
             list = departmentMapper.selectList(queryWrapper);
-        }else{
+        }*/else{
             list.add(departmentMapper.selectById(department.getId()));
         }
         result.put("code","true");
