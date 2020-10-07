@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cs.police.cspolice.common.BaseUtils;
 import com.cs.police.cspolice.dao.mapper.AdsMapper;
 import com.cs.police.cspolice.pojo.Ads;
+import com.cs.police.cspolice.pojo.User;
 import com.cs.police.cspolice.rest.AdsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -31,10 +33,14 @@ public class AdsServiceImpl extends ServiceImpl<AdsMapper, Ads> implements AdsSe
     }
 
     @Override
-    public List<Ads> allEmployeeCpuAds(String searchKey,String searchValue) {
+    public List<Ads> allEmployeeCpuAds(String searchKey, String searchValue, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         QueryWrapper<Ads> queryWrapper=new QueryWrapper<>();
         String s = BaseUtils.adsMap.get(searchKey);
         queryWrapper.like(s,searchValue);
+        if(!"a".equals(user.getPosition())) {
+            queryWrapper.eq("department_name", user.getDpName());
+        }
         List<Ads> adsList = adsMapper.selectList(queryWrapper);
         return adsList ;
     }

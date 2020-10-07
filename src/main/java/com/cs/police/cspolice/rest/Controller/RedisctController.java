@@ -1,13 +1,18 @@
 package com.cs.police.cspolice.rest.Controller;
 
+import com.alibaba.fastjson.JSON;
 import com.cs.police.cspolice.dao.mapper.AdsMapper;
 import com.cs.police.cspolice.pojo.Ads;
+import org.apache.xmlbeans.impl.jam.mutable.MAnnotatedElement;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author by hp
@@ -34,9 +39,19 @@ public class RedisctController {
      * @return
      */
     @RequestMapping("/outLogin")
+    @ResponseBody
     public String outLogin(HttpServletRequest request){
-        request.getSession().setAttribute("user",null);
-        return "login";
+        Map map=new HashMap();
+        try {
+            request.getSession().setAttribute("user",null);
+            request.getSession().setAttribute("department",null);
+           map.put("code","true");
+           map.put("msg","退出登录成功");
+        }catch (Exception e){
+            map.put("code","false");
+            map.put("msg","退出登录失败");
+        }
+        return JSON.toJSONString(map);
     }
 
     /**

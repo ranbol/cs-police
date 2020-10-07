@@ -4,6 +4,7 @@ package com.cs.police.cspolice.rest;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cs.police.cspolice.pojo.Ads;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public interface AdsService extends IService<Ads> {
      * @param ads
      * @return
      */
-    List<Ads> allEmployeeCpuAds(String searchKey,String searchValue);
+    List<Ads> allEmployeeCpuAds(String searchKey, String searchValue, HttpServletRequest request);
 
     /**
      * 删除信息

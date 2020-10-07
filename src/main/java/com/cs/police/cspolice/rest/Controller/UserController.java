@@ -49,15 +49,11 @@ public class UserController {
      * @param request
      * @return
      */
-    @GetMapping(value = "/user/update")
-    public String update(String password, HttpServletRequest request){
+    @PostMapping(value = "/user/update")
+    public String update(@RequestBody User user, HttpServletRequest request){
         Map<String,Object> map = new HashMap<>();
         HttpSession session=request.getSession();
-        User user = (User)session.getAttribute("user");
-        User user1 = new User();
-        user1.setPassword(password);
-        user1.setId(user.getId());
-        map = userService.userUpdate(user1);
+        map = userService.userUpdate(user);
         return JSON.toJSONString(map);
     }
 
@@ -68,28 +64,34 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/user/select")
-    public Map<String,Object> selectUser(Map<String,Object> queryMap,HttpServletRequest request){
+    public Map<String,Object> selectUser( @RequestBody Map<String,Object> queryMap,HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         try {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             int page = (Integer) queryMap.get("page");
-            int total = (Integer) queryMap.get("total");
-            IPage<User> iPage = new Page<User>(page,total);
+            int limit = (Integer) queryMap.get("limit");
+            IPage<User> iPage = new Page<User>(page,limit);
             IPage<User> userIPage;
             Map<String,Object> map = new HashMap<>();
             List<User> listUser = new ArrayList<>();
             if ("a".equals(user.getPosition())) {
                 QueryWrapper<User> queryWrapper = new QueryWrapper<>();
                 if(!"all".equals(queryMap.get("position"))) {
-                    queryWrapper.eq("position", queryMap.get("position"));
+                    queryWrapper.like("position", queryMap.get("position"));
+                }
+                if (!"".equals(queryMap.get("dpName"))||queryMap.get("dpName")!=null){
+                    queryWrapper.like("dp_name", queryMap.get("dpName"));
                 }
                 userIPage = userService.page(iPage,queryWrapper);
                 listUser.addAll(userIPage.getRecords());
                 map.put("count",userIPage.getCurrent());
             } else if ("b".equals(user.getPosition())) {
                 QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-                queryWrapper.eq("dp_name", user.getDpName());
+                queryWrapper.like("dp_name", user.getDpName());
+                if (!"".equals(queryMap.get("dpName"))||queryMap.get("dpName")!=null){
+                    queryWrapper.like("dp_name", queryMap.get("dpName"));
+                }
                 userIPage = userService.page(iPage,queryWrapper);
                 listUser.addAll(userIPage.getRecords());
                 map.put("count",userIPage.getCurrent());
@@ -119,7 +121,7 @@ public class UserController {
         Map<String,Object> map = new HashMap<>();
         try{
             userMapper.deleteById(id);
-            map.put("code","false");
+            map.put("code","true");
             map.put("msg","删除用户成功");
         }catch (Exception e){
             e.printStackTrace();
@@ -141,11 +143,7 @@ public class UserController {
         if (map.get("code")=="true"){
             HttpSession session=request.getSession();
             session.setAttribute("user",map.get("data"));
-            QueryWrapper queryWrapper=new QueryWrapper();
-            queryWrapper.eq("dp_name",user.getDpName());
-            Department department = departmentMapper.selectOne(queryWrapper);
-            session.setAttribute("department",department);
-            request.getSession().setMaxInactiveInterval(6000);
+            session.setAttribute("department",map.get("department"));
         }
         return JSON.toJSONString(map);
     }
@@ -158,14 +156,36 @@ public class UserController {
     @PostMapping(value = "/user/register")
     @ResponseBody
     public String register(@RequestBody User user){
-        int insert = userMapper.insert(user);
+        user.setPassword("123456");
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("name",user.getUserName());
+        User user1 = userMapper.selectOne(queryWrapper);
         Map<String,Object> returnMap=new HashMap<>();
+        if (user1!=null){
+            returnMap.put("code","false");returnMap.put("msg","该用户名已存在");
+            return  JSON.toJSONString(returnMap) ;
+        }
+        int insert = userMapper.insert(user);
         if (insert==1){
             returnMap.put("code","true");returnMap.put("msg","新增用户成功");
         }else {
             returnMap.put("code","false");returnMap.put("msg","新增用户失败");
         }
         return JSON.toJSONString(returnMap) ;
+    }
+    @GetMapping("/user/charge")
+    @ResponseBody
+    public String charge(HttpServletRequest request){
+        Object user = request.getSession().getAttribute("user");
+        Map map=new HashMap();
+        if (user==null){
+            map.put("code","false");
+            map.put("msg","用户登陆超时");
+        }else {
+            map.put("code","true");
+            map.put("msg","用户未超时");
+        }
+        return  JSON.toJSONString(map);
     }
 
 }

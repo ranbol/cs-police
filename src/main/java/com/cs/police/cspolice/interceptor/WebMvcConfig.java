@@ -1,4 +1,3 @@
-/*
 package com.cs.police.cspolice.interceptor;
 
 import org.springframework.context.annotation.Bean;
@@ -31,4 +30,3 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 }
 
 
-*/

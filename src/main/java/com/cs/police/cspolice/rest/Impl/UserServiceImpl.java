@@ -42,6 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             queryWrapper1.eq("name",user1.getDpName());
             Department department = departmentMapper.selectOne(queryWrapper1);
             returnMap.put("code","true");returnMap.put("msg","登录成功");returnMap.put("data",user1);
+            returnMap.put("department",department);
         }
         return returnMap;
     }

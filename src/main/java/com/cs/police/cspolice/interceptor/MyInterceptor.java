@@ -31,6 +31,10 @@ public class MyInterceptor implements HandlerInterceptor {
            if (request.getServletPath ().endsWith ("404")) {
                return true;
            }
+       if (request.getServletPath ().endsWith ("charge")) {
+           return true;
+       }
+
           //2、放行登录请求
           if (request.getServletPath ().endsWith ("/login")) {
               System.out.println ("url:"+url+"放行成功！");
@@ -84,9 +88,9 @@ public class MyInterceptor implements HandlerInterceptor {
                int intervalTime = (int) ((lastAccessedTime - operateTime) / 1000);
 //               System.out.println("-----> intervalTime: " + intervalTime);
                //如果超过十秒没有交互的话，就跳转到超时界面
-               if (intervalTime > 600) {
-                   response.sendRedirect("/login");
-                   return true;
+               if (intervalTime > 60000) {
+                /*   response.sendRedirect("/login");*/
+                   return false;
                }
                //更新operateTime
                session.setAttribute("operateTime", lastAccessedTime);
@@ -94,8 +98,8 @@ public class MyInterceptor implements HandlerInterceptor {
            }
        }
        if (user==null){
-           response.sendRedirect("/login");
-           return true;
+         /*  response.sendRedirect("/login");*/
+           return false;
        }
         //7、非法请求 即这些请求需要登录后才能访问
           Response baseResponse = new Response ();

@@ -3,6 +3,7 @@ package com.cs.police.cspolice.rest.Controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.cs.police.cspolice.pojo.Ads;
+import com.cs.police.cspolice.pojo.User;
 import com.cs.police.cspolice.rest.AdsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
@@ -38,10 +40,11 @@ public class AdsController {
     public String showAllEmployeeAds(@RequestParam(name = "page",required = true,defaultValue ="1") Integer pageNum,
                                      @RequestParam(name="limit", required=true,defaultValue = "10") Integer pageSize,
                                      @RequestParam (name = "searchKey") String searchKey,
-                                     @RequestParam (name = "searchValue") String searchValue){
+                                     @RequestParam (name = "searchValue") String searchValue,
+                                     HttpServletRequest request){
         Map map=new HashMap();
         PageHelper.startPage(pageNum,pageSize);
-        List<Ads> adsList = adsService.allEmployeeCpuAds(searchKey,searchValue);
+        List<Ads> adsList = adsService.allEmployeeCpuAds(searchKey,searchValue,request);
         PageInfo<Ads> pageInfo=new PageInfo<>(adsList);
         if (adsList.size()==0){
             map.put("code","true");
