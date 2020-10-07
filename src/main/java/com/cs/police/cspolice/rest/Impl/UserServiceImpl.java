@@ -38,7 +38,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (user1==null){
          returnMap.put("code","false");returnMap.put("msg","用户名或密码错误");
         }else {
-            Department department = departmentMapper.selectById(user1.getDpId());
+            QueryWrapper queryWrapper1=new QueryWrapper();
+            queryWrapper1.eq("name",user1.getDpName());
+            Department department = departmentMapper.selectOne(queryWrapper1);
             returnMap.put("code","true");returnMap.put("msg","登录成功");returnMap.put("data",user1);
         }
         return returnMap;
