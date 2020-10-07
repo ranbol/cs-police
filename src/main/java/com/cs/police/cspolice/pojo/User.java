@@ -44,8 +44,8 @@ public class User  implements Serializable {
     /**
      * 所属部门
      */
-    @TableField(value = "dp_id")
-    private Integer dpId;
+    @TableField(value = "dp_name")
+    private String dpName;
 
     /**
      * 描述

@@ -81,13 +81,15 @@ public class UserController {
             List<User> listUser = new ArrayList<>();
             if ("a".equals(user.getPosition())) {
                 QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-                queryWrapper.eq("position", user.getDpId());
+                if(!"all".equals(queryMap.get("position"))) {
+                    queryWrapper.eq("position", queryMap.get("position"));
+                }
                 userIPage = userService.page(iPage,queryWrapper);
                 listUser.addAll(userIPage.getRecords());
                 map.put("count",userIPage.getCurrent());
             } else if ("b".equals(user.getPosition())) {
                 QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-                queryWrapper.eq("dp_id", user.getDpId());
+                queryWrapper.eq("dp_name", user.getDpName());
                 userIPage = userService.page(iPage,queryWrapper);
                 listUser.addAll(userIPage.getRecords());
                 map.put("count",userIPage.getCurrent());
@@ -139,7 +141,9 @@ public class UserController {
         if (map.get("code")=="true"){
             HttpSession session=request.getSession();
             session.setAttribute("user",map.get("data"));
-            Department department = departmentMapper.selectById(user.getDpId());
+            QueryWrapper queryWrapper=new QueryWrapper();
+            queryWrapper.eq("dp_name",user.getDpName());
+            Department department = departmentMapper.selectOne(queryWrapper);
             session.setAttribute("department",department);
             request.getSession().setMaxInactiveInterval(6000);
         }
@@ -151,7 +155,7 @@ public class UserController {
      * @param user
      * @return
      */
-    @PostMapping(value = "/user/regist")
+    @PostMapping(value = "/user/register")
     @ResponseBody
     public String register(@RequestBody User user){
         int insert = userMapper.insert(user);
