@@ -37,7 +37,7 @@ public class DepartmentController {
             queryWrapper.eq("pid",department.getId());
             list = departmentMapper.selectList(queryWrapper);
         }*/else{
-            list.add(departmentMapper.selectById(department.getId()));
+            list.add(department);
         }
         result.put("code","true");
         result.put("data",list);
