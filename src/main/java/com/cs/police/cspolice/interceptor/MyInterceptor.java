@@ -40,6 +40,15 @@ public class MyInterceptor implements HandlerInterceptor {
               System.out.println ("url:"+url+"放行成功！");
               return true;
           }
+       //2、放行登录请求
+       if (request.getServletPath ().endsWith ("/relogin")) {
+           System.out.println ("url:"+url+"放行成功！");
+           return true;
+       }
+       if (request.getServletPath ().endsWith ("/excel")) {
+           System.out.println ("url:"+url+"放行成功！");
+           return true;
+       }
        if (request.getServletPath ().endsWith ("/user/login")) {
            System.out.println ("url:"+url+"放行成功！");
            return true;

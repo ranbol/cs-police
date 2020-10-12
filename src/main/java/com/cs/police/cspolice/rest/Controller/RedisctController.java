@@ -35,6 +35,15 @@ public class RedisctController {
     }
 
     /**
+     * 跳转到测试下载
+     * @return
+     */
+    @RequestMapping("/relogin")
+    public String relogin(){
+        return "relogin";
+    }
+
+    /**
      * 退出登录
      * @return
      */
