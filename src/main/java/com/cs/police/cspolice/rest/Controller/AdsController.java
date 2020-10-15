@@ -81,7 +81,7 @@ public class AdsController {
     public String addAds(@RequestBody Ads ads){
         Map map=new HashMap();
         if (adsService.addAds(ads)){
-            map.put("code","success");map.put("msg","添加成功");
+            map.put("code","true");map.put("msg","添加成功");
         }else {
             map.put("code","false");map.put("msg","添加失败");
         }
@@ -97,7 +97,7 @@ public class AdsController {
     public String changeAds(@RequestBody Ads ads){
         Map map=new HashMap();
         if (adsService.updateAds(ads)){
-            map.put("code","success");map.put("msg","修改成功");
+            map.put("code","true");map.put("msg","修改成功");
         }else {
             map.put("code","false");map.put("msg","修改失败");
         }
@@ -123,7 +123,7 @@ public class AdsController {
                 return JSON.toJSONString(map);
             }
         }
-        map.put("code","success");
+        map.put("code","true");
         map.put("msg","删除成功");
         return JSON.toJSONString(map);
     }
@@ -144,7 +144,7 @@ public class AdsController {
                 map.put("msg","删除失败");
                 return JSON.toJSONString(map);
             }
-        map.put("code","success");
+        map.put("code","true");
         map.put("msg","删除成功");
         return JSON.toJSONString(map);
     }

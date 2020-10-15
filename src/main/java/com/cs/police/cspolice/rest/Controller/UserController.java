@@ -89,6 +89,7 @@ public class UserController {
             } else if ("b".equals(user.getPosition())) {
                 QueryWrapper<User> queryWrapper = new QueryWrapper<>();
                 queryWrapper.like("dp_name", user.getDpName());
+                queryWrapper.ne("position","a");
                 if (!"".equals(queryMap.get("dpName"))||queryMap.get("dpName")!=null){
                     queryWrapper.like("dp_name", queryMap.get("dpName"));
                 }

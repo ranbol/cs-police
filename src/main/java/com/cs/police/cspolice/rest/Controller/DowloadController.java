@@ -26,7 +26,7 @@ public class DowloadController {
     public void download(HttpServletRequest request, HttpServletResponse response,
                                        @RequestParam(name = "searchKey") String searchKey,
                                        @RequestParam (name = "searchValue") String searchValue){
-         List<Ads> adsList = adsService.allEmployeeCpuAds(null, null, request);
+         List<Ads> adsList = adsService.allEmployeeCpuAds(searchKey, searchValue, request);
 
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("台账信息", "台账信息表", ExcelType.XSSF), Ads.class, adsList);
         FileOutputStream fileOutputStream = null;

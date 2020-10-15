@@ -37,7 +37,23 @@ public class AdsServiceImpl extends ServiceImpl<AdsMapper, Ads> implements AdsSe
         User user = (User) request.getSession().getAttribute("user");
         QueryWrapper<Ads> queryWrapper=new QueryWrapper<>();
         String s = BaseUtils.adsMap.get(searchKey);
-        queryWrapper.like(s,searchValue);
+        if ("cpu_mark".equals(s)&&"其他".equals(searchValue)){
+            queryWrapper.ne(s,"联想");
+            queryWrapper.ne(s,"惠普");
+            queryWrapper.ne(s,"戴尔");
+            queryWrapper.ne(s,"华硕");
+        }else if ("virus_nv".equals(s)&&"其他".equals(searchValue)){
+            queryWrapper.ne(s,"瑞星");
+            queryWrapper.ne(s,"瑞星杀毒公安版");
+        }else if("inte_type".equals(s)&&"其他".equals(searchValue)){
+            queryWrapper.ne(s,"视频网");
+            queryWrapper.ne(s,"公安网");
+            queryWrapper.ne(s,"党政网");
+            queryWrapper.ne(s,"互联网");
+            queryWrapper.ne(s,"单机");
+        }else {
+            queryWrapper.like(s,searchValue);
+        }
         if(!"a".equals(user.getPosition())) {
             queryWrapper.eq("department_name", user.getDpName());
         }
